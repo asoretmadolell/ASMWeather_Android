@@ -1,6 +1,14 @@
 package com.alejandrosoret.asmweather.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
 
 /*************************************************************/
 /*                                                           */
@@ -37,16 +45,15 @@ public class Condition
 	/* Condition.Condition()                                 */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public Condition( long id, long cityId, int cloudCoverPercentage,
-               Date observationTime, int pressure, int temperatureCelsius,
-               int visibility, int temperatureFahrenheit, int windSpeedMph,
+	public Condition( int cloudCoverPercentage, Date observationTime,
+               int pressure, int temperatureCelsius, int visibility,
+               int temperatureFahrenheit, int windSpeedMph,
                float precipitation, int windDirectionDegrees,
                String windDirectionCompass, String iconUrl, int humidity,
                int windSpeedKmph, int weatherCode, String weatherDescription )
      {
 	     super();
-	     this.id = id;
-	     this.cityId = cityId;
+	     this.id = this.cityId = -1;
 	     this.cloudCoverPercentage = cloudCoverPercentage;
 	     this.observationTime = observationTime;
 	     this.pressure = pressure;
@@ -63,6 +70,36 @@ public class Condition
 	     this.weatherCode = weatherCode;
 	     this.weatherDescription = weatherDescription;
      }
+	
+	/*********************************************************/
+	/*                                                       */ 
+	/* Condition.Condition() JSON object constructor         */ 
+	/*                                                       */ 
+	/*********************************************************/
+	@SuppressLint( "SimpleDateFormat ")
+	public Condition( JSONObject jsonObject ) throws JSONException, ParseException
+	{
+		this( 0, (Date)null, 0, 0, 0, 0, 0, 0, 0, null, null, 0, 0, 0, null );
+		
+		cloudCoverPercentage = jsonObject.getInt( "cloudcover" );
+		SimpleDateFormat dateFormat = new SimpleDateFormat( "HH:mm" );
+		observationTime = dateFormat.parse( jsonObject.getString( "observation_time" ) );
+		pressure = jsonObject.getInt( "pressure" );
+		temperatureCelsius = jsonObject.getInt( "temp_C" );
+		visibility = jsonObject.getInt( "visibility" );
+		temperatureFahrenheit = jsonObject.getInt( "temp_F" );
+		windSpeedMph = jsonObject.getInt( "windspeedMiles" );
+		precipitation = (float)jsonObject.getDouble( "precipMM" );
+		windDirectionDegrees = jsonObject.getInt( "winddirDegree" );
+		windDirectionCompass = jsonObject.getString( "winddir16Point" );
+		JSONArray iconUrlArray = jsonObject.getJSONArray( "weatherIconUrl" );
+		iconUrl = iconUrlArray.getJSONObject( 0 ).getString( "value" );
+		humidity = jsonObject.getInt( "humidity" );
+		windSpeedKmph = jsonObject.getInt( "windspeedKmph" );
+		weatherCode = jsonObject.getInt( "weatherCode" );
+		JSONArray descriptionArray = jsonObject.getJSONArray( "weatherDesc" );
+		weatherDescription = descriptionArray.getJSONObject( 0 ).getString( "value" );
+	}
 
 	/*********************************************************/
 	/*                                                       */ 

@@ -1,8 +1,13 @@
 package com.alejandrosoret.asmweather.model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /*************************************************************/
 /*                                                           */ 
@@ -28,6 +33,23 @@ public class ForecastList
      {
 		forecastList = new ArrayList< Forecast >();
 		forecastMap = new TreeMap< Long, Forecast >();
+     }
+	
+	/*********************************************************/
+	/*                                                       */ 
+	/* ForecastList.ForecastList() JSON object constructor   */ 
+	/*                                                       */ 
+	/*********************************************************/
+	public ForecastList( JSONArray entries ) throws JSONException, ParseException
+     {
+		this();
+		
+		for( int i = 0; i < entries.length(); i++ )
+		{
+			JSONObject objForecast = entries.getJSONObject( i );
+			Forecast forecast = new Forecast( objForecast );
+			this.add( forecast );
+		}
      }
 	
 	/*********************************************************/

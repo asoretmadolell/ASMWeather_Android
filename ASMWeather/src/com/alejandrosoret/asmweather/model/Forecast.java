@@ -1,6 +1,12 @@
 package com.alejandrosoret.asmweather.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /*************************************************************/
 /*                                                           */ 
@@ -60,6 +66,34 @@ public class Forecast
 	     this.weatherDescription = weatherDescription;
 	     this.minTemperatureFahrenheit = minTemperatureFahrenheit;
      }
+	
+	/*********************************************************/
+	/*                                                       */ 
+	/* Forecast.Forecast()  JSON object constructor          */ 
+	/*                                                       */ 
+	/*********************************************************/
+	public Forecast( JSONObject jsonObject ) throws JSONException, ParseException
+	{
+		this( null, 0, 0, 0, null, 0, (Date)null, 0, 0, 0, 0, null, null, 0 );
+
+		JSONArray iconUrlArray = jsonObject.getJSONArray( "weatherIconUrl" );
+		iconUrl = iconUrlArray.getJSONObject( 0 ).getString( "value" );
+		minTemperatureCelsius = jsonObject.getInt( "tempMin_C" );
+		windSpeedMph = jsonObject.getInt( "windspeedMiles" );
+		windSpeedKmph = jsonObject.getInt( "windspeedKmph" );
+		windDirection = jsonObject.getString( "winddirection" );
+		maxTemperatureCelsius = jsonObject.getInt( "tempMax_C" );
+		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd" );
+		forecastDate = dateFormat.parse( jsonObject.getString( "date" ) );
+		weatherCode = jsonObject.getInt( "weatherCode" );
+		maxTemperatureFahrenheit = jsonObject.getInt( "tempMax_F" );
+		precipitation = (float)jsonObject.getDouble( "precipMM" );
+		windDirectionDegrees = jsonObject.getInt( "winddirDegree" );
+		windDirectionCompass = jsonObject.getString( "winddir16Point" );
+		JSONArray descriptionArray = jsonObject.getJSONArray( "weatherDesc" );
+		weatherDescription = descriptionArray.getJSONObject( 0 ).getString( "value" );
+		minTemperatureFahrenheit = jsonObject.getInt( "tempMin_F" );
+	}
 
 	/*********************************************************/
 	/*                                                       */ 

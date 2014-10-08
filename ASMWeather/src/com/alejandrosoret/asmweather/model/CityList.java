@@ -1,8 +1,13 @@
 package com.alejandrosoret.asmweather.model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /*************************************************************/
 /*                                                           */ 
@@ -29,6 +34,26 @@ public class CityList
 	     cityList = new ArrayList< City >();
 	     cityMap = new TreeMap<Long, City >();
      }
+	
+	/*********************************************************/
+	/*                                                       */ 
+	/* CityList.CityList() JSON Object constructor           */ 
+	/*                                                       */ 
+	/*********************************************************/
+	public CityList( JSONObject jsonObject ) throws JSONException, ParseException
+	{
+		this();
+		
+		JSONObject search = jsonObject.getJSONObject( "search_api" );
+		JSONArray entries = search.getJSONArray( "result" );
+		
+		for( int i = 0; i < entries.length(); i++ )
+		{
+			JSONObject objCity = entries.getJSONObject( i );
+			City City = new City( objCity );
+			this.add( City );
+		}
+	}
 	
 	/*********************************************************/
 	/*                                                       */ 

@@ -1,5 +1,9 @@
 package com.alejandrosoret.asmweather.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /*************************************************************/
 /*                                                           */ 
 /* City                                                      */ 
@@ -29,7 +33,7 @@ public class City
 	/*********************************************************/
 	public City( long id, String name, String country, String latitude,
                String longitude, long population, String region,
-               String weatherUrl, Condition currentCondition )
+               String weatherUrl )
      {
 	     super();
 	     this.id = id;
@@ -40,8 +44,34 @@ public class City
 	     this.population = population;
 	     this.region = region;
 	     this.weatherUrl = weatherUrl;
-	     this.currentCondition = currentCondition;
+	     this.currentCondition = null;
      }
+	
+	/*********************************************************/
+	/*                                                       */ 
+	/* City.City() JSON Object constructor                   */ 
+	/*                                                       */ 
+	/*********************************************************/
+	public City( JSONObject jsonObject ) throws JSONException
+	{
+		this( -1, null, null, null, null, 0, null, null );
+		
+		JSONArray areaNameArray = jsonObject.getJSONArray( "areaName" );
+		name = areaNameArray.getJSONObject( 0 ).getString( "value" );
+		
+		JSONArray countryArray = jsonObject.getJSONArray( "country" );
+		country = countryArray.getJSONObject( 0 ).getString( "value" );
+		
+		latitude = jsonObject.getString( "latitude" );
+		longitude = jsonObject.getString( "longitude" );
+		population = jsonObject.getLong( "population" );
+		
+		JSONArray regionArray = jsonObject.getJSONArray( "region" );
+		region = regionArray.getJSONObject( 0 ).getString( "value" );
+		
+		JSONArray weatherUrlArray = jsonObject.getJSONArray( "weatherUrl" );
+		weatherUrl = weatherUrlArray.getJSONObject( 0 ).getString( "value" );
+	}
 
 	/*********************************************************/
 	/*                                                       */ 
