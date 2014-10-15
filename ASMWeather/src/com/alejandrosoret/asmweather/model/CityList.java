@@ -50,8 +50,8 @@ public class CityList
 		for( int i = 0; i < entries.length(); i++ )
 		{
 			JSONObject objCity = entries.getJSONObject( i );
-			City City = new City( objCity );
-			this.add( City );
+			City city = new City( -1, objCity );
+			this.add( city );
 		}
 	}
 	

@@ -52,9 +52,9 @@ public class City
 	/* City.City() JSON Object constructor                   */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public City( JSONObject jsonObject ) throws JSONException
+	public City( long id, JSONObject jsonObject ) throws JSONException
 	{
-		this( -1, null, null, null, null, 0, null, null );
+		this( id, null, null, null, null, 0, null, null );
 		
 		JSONArray areaNameArray = jsonObject.getJSONArray( "areaName" );
 		name = areaNameArray.getJSONObject( 0 ).getString( "value" );
