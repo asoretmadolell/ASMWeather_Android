@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
+import com.alejandrosoret.asmweather.model.City;
+import com.alejandrosoret.asmweather.model.CityList;
+
 /*************************************************************/
 /*                                                           */ 
 /* CityActivity                                              */ 
@@ -27,9 +30,10 @@ public class CityActivity extends ActionBarActivity
 	     super.onCreate( savedInstanceState );
 	     setContentView( R.layout.activity_city );
 	     
+	     CityList cityList = ASMApplication.cityList;
+	     City city = cityList.get( getIntent().getIntExtra( ASMApplication.IDRC_CITY_LIST_ID, -1 ) );
+	     
 	     TextView cityName = (TextView)findViewById( R.id.IDV_CITY_NAME );
-
-	     Bundle extras = getIntent().getExtras();
-	     cityName.setText( extras.getString( "IDRC_PHOTO_NAME" ) );
+	     cityName.setText( city.getName() );
 	}
 }

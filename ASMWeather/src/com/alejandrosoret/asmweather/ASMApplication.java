@@ -2,6 +2,8 @@ package com.alejandrosoret.asmweather;
 
 import android.app.Application;
 
+import com.alejandrosoret.asmweather.model.CityList;
+
 /*************************************************************/
 /*                                                           */ 
 /* ASMApplication                                            */ 
@@ -14,5 +16,6 @@ import android.app.Application;
 /*************************************************************/
 public class ASMApplication extends Application
 {
-	public static final String IDRC_CITY_NAME = "IDRC_CITY_NAME";
+	public static CityList cityList;
+	public static final String IDRC_CITY_LIST_ID = "IDRC_CITY_LIST_ID";
 }

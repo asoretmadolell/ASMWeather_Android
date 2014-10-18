@@ -4,11 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.alejandrosoret.asmweather.R;
 import com.alejandrosoret.asmweather.model.City;
+import com.alejandrosoret.asmweather.model.CityList;
 
 /*************************************************************/
 /*                                                           */ 
@@ -20,23 +21,22 @@ import com.alejandrosoret.asmweather.model.City;
 /*                                                           */ 
 /*                                                           */ 
 /*************************************************************/
-public class CityAdapter extends BaseAdapter
+public class CityAdapter extends ArrayAdapter< City >
 {
 	private Context context;
-	City cityMadrid = new City( -1, "Madrid", "Spain", "40.000", "-3.683", 3102644, "Madrid", "http://www.worldweatheronline.com/v2/weather.aspx?q=40.4,-3.6833" );
-	City cityBarcelona = new City( -1, "Barcelona", "Spain", "41.383", "2.183", 1570378, "Catalonia", "http://www.worldweatheronline.com/v2/weather.aspx?q=41.3833,2.1833" );
-	City cityValencia = new City( -1, "Valencia", "Spain", "39.467", "-0.367", 769897, "Comunidad Valenciana", "http://www.worldweatheronline.com/v2/weather.aspx?q=39.4667,-0.3667" );
-	City[] cities = new City[] { cityMadrid, cityBarcelona, cityValencia };
+	private CityList cityList;
 	
 	/*********************************************************/
 	/*                                                       */ 
 	/* CityAdapter.CityAdapter()                             */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public CityAdapter( Context context )
-	{
-		this.context = context;
-	}
+	public CityAdapter( Context context, CityList cityList )
+     {
+	     super( context, R.layout.listview_city_item );
+	     this.context = context;
+	     this.cityList = cityList;
+     }
 
 	/*********************************************************/
 	/*                                                       */ 
@@ -46,7 +46,7 @@ public class CityAdapter extends BaseAdapter
 	@Override
      public int getCount()
      {
-	     return cities.length;
+	     return cityList.getCityList().size();
      }
 
 	/*********************************************************/
@@ -55,9 +55,9 @@ public class CityAdapter extends BaseAdapter
 	/*                                                       */ 
 	/*********************************************************/
 	@Override
-     public Object getItem( int position )
+     public City getItem( int position )
      {
-	     return null;
+	     return cityList.get( position );
      }
 
 	/*********************************************************/
@@ -68,7 +68,10 @@ public class CityAdapter extends BaseAdapter
 	@Override
      public long getItemId( int position )
      {
-	     return position;
+		City city = cityList.get( position );
+		long hashcode = city.hashCode();
+		
+	     return cityList.get( position ).hashCode();
      }
 
 	/*********************************************************/
@@ -89,7 +92,7 @@ public class CityAdapter extends BaseAdapter
 		else itemView = convertView;
 		
 		TextView cityName = (TextView)itemView.findViewById( R.id.IDV_CITY_NAME );
-		cityName.setText( cities[ position ].getName() );
+		cityName.setText( cityList.get( position ).getName() );
 		
 	     return itemView;
      }
