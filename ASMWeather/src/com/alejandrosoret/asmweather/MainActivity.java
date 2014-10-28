@@ -9,6 +9,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.alejandrosoret.asmweather.adapters.CityAdapter;
+import com.alejandrosoret.asmweather.db.WeatherDAO;
 import com.alejandrosoret.asmweather.model.City;
 import com.alejandrosoret.asmweather.model.CityList;
 
@@ -37,13 +38,10 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.activity_main );
 		
-		ASMApplication.cityList = new CityList();
-		ASMApplication.cityList.add( new City( 0, "Madrid", "Spain", "40.000", "-3.683", 3102644, "Madrid", "http://www.worldweatheronline.com/v2/weather.aspx?q=40.4,-3.6833" ) );
-		ASMApplication.cityList.add( new City( 1, "Barcelona", "Spain", "41.383", "2.183", 1570378, "Catalonia", "http://www.worldweatheronline.com/v2/weather.aspx?q=41.3833,2.1833" ) );
-		ASMApplication.cityList.add( new City( 2, "Valencia", "Spain", "39.467", "-0.367", 769897, "Comunidad Valenciana", "http://www.worldweatheronline.com/v2/weather.aspx?q=39.4667,-0.3667" ) );
+		ASMApplication.initializeData( this );
 		
 		cityListView = (ListView) findViewById( R.id.IDV_CITY_LISTVIEW );
-		cityListView.setAdapter( new CityAdapter( this, ASMApplication.cityList ) );
+		cityListView.setAdapter( new CityAdapter( this, new WeatherDAO( this ).selectAllCities() ) );
 		cityListView.setOnItemClickListener( this );
 	}
 
@@ -58,7 +56,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 		if( (ListView)parent == cityListView )
 		{
 			Intent intent = new Intent( MainActivity.this, CityActivity.class );
-			intent.putExtra( ASMApplication.IDRC_CITY_LIST_ID, (long)id );
+			intent.putExtra( ASMApplication.IDRC_CITY_LIST_ID, (long)position );
 			startActivity( intent );
 		}
      }

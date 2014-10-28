@@ -1,14 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    
-    <TextView 
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/IDV_CITY_NAME"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
         android:layout_marginTop="20dp"
-        android:id="@+id/IDV_CITY_NAME"
-        android:text="hola" />
-    
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_TEMPERATURE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
 </LinearLayout>

@@ -16,7 +16,7 @@ public class WeatherDbContract
 {
 	/*********************************************************/
 	/*                                                       */ 
-	/* CBlogDBContract.CBlogDbContract()                     */ 
+	/* WeatherDbContract.WeatherDbContract()                 */ 
 	/* private constructor: no instances allowed             */ 
 	/*                                                       */ 
 	/*********************************************************/
@@ -24,10 +24,10 @@ public class WeatherDbContract
 	
 	/*********************************************************/
 	/*                                                       */ 
-	/* CWeatherDBContract.CCityTable()                       */ 
+	/* WeatherDBContract.CityTable()                         */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public static abstract class CCityTable implements BaseColumns
+	public static abstract class CityTable implements BaseColumns
 	{
 		public static final String TABLE_NAME 							= "City";
 		public static final String COLUMN_NAME_NAME 						= "Name";
@@ -40,10 +40,10 @@ public class WeatherDbContract
 	
 	/*********************************************************/
 	/*                                                       */ 
-	/* CWeatherDBContract.CConditionTable()                  */ 
+	/* WeatherDBContract.ConditionTable()                    */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public static abstract class CConditionTable implements BaseColumns
+	public static abstract class ConditionTable implements BaseColumns
 	{
 		public static final String TABLE_NAME 							= "Condition";
 		public static final String COLUMN_NAME_CITY_ID					= "CityId";
@@ -66,10 +66,10 @@ public class WeatherDbContract
 	
 	/*********************************************************/
 	/*                                                       */ 
-	/* CWeatherDBContract.CForecastTable()                   */ 
+	/* WeatherDBContract.ForecastTable()                     */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public static abstract class CForecastTable implements BaseColumns
+	public static abstract class ForecastTable implements BaseColumns
 	{
 		public static final String TABLE_NAME 							= "Forecast";
 		public static final String COLUMN_NAME_CITY_ID					= "CityId";

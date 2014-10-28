@@ -1,15 +1,15 @@
 package com.alejandrosoret.asmweather.adapters;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.alejandrosoret.asmweather.R;
 import com.alejandrosoret.asmweather.model.City;
-import com.alejandrosoret.asmweather.model.CityList;
 
 /*************************************************************/
 /*                                                           */ 
@@ -21,79 +21,41 @@ import com.alejandrosoret.asmweather.model.CityList;
 /*                                                           */ 
 /*                                                           */ 
 /*************************************************************/
-public class CityAdapter extends ArrayAdapter< City >
+public class CityAdapter extends CursorAdapter
 {
-	private Context context;
-	private CityList cityList;
-	
 	/*********************************************************/
 	/*                                                       */ 
 	/* CityAdapter.CityAdapter()                             */ 
 	/*                                                       */ 
 	/*********************************************************/
-	public CityAdapter( Context context, CityList cityList )
+	public CityAdapter( Context context, Cursor cursor )
      {
-	     super( context, R.layout.listview_city_item );
-	     this.context = context;
-	     this.cityList = cityList;
+		super( context, cursor, 0 );
      }
 
 	/*********************************************************/
 	/*                                                       */ 
-	/* CityAdapter.getCount()                                */ 
+	/* CityAdapter.bindView()                                */ 
 	/*                                                       */ 
 	/*********************************************************/
 	@Override
-     public int getCount()
+     public void bindView( View view, Context context, Cursor cursor )
      {
-	     return cityList.getCityList().size();
+		City city = new City( cursor );
+		
+		TextView cityName = (TextView)view.findViewById( R.id.IDV_CITY_NAME );
+		cityName.setText( city.getName() );
      }
 
 	/*********************************************************/
 	/*                                                       */ 
-	/* CityAdapter.getItem()                                 */ 
+	/* CityAdapter.newView()                                 */ 
 	/*                                                       */ 
 	/*********************************************************/
 	@Override
-     public City getItem( int position )
+     public View newView( Context context, Cursor cursor, ViewGroup viewGroup)
      {
-	     return cityList.get( position );
-     }
-
-	/*********************************************************/
-	/*                                                       */ 
-	/* CityAdapter.getItemId()                               */ 
-	/*                                                       */ 
-	/*********************************************************/
-	@Override
-     public long getItemId( int position )
-     {
-		City city = cityList.get( position );
-		long hashcode = city.hashCode();
-		
-	     return cityList.get( position ).hashCode();
-     }
-
-	/*********************************************************/
-	/*                                                       */ 
-	/* CityAdapter.getView()                                 */ 
-	/*                                                       */ 
-	/*********************************************************/
-	@Override
-     public View getView( int position, View convertView, ViewGroup parent )
-     {
-		View itemView = null;
-		
-		if( convertView == null )
-		{
-			LayoutInflater inflater = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-			itemView = inflater.inflate( R.layout.listview_city_item, null );
-		}
-		else itemView = convertView;
-		
-		TextView cityName = (TextView)itemView.findViewById( R.id.IDV_CITY_NAME );
-		cityName.setText( cityList.get( position ).getName() );
-		
-	     return itemView;
+		LayoutInflater inflater = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+		return inflater.inflate( R.layout.listview_city_item, null );
      }
 }

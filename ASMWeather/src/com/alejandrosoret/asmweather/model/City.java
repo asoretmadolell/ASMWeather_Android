@@ -4,6 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.database.Cursor;
+
+import com.alejandrosoret.asmweather.db.WeatherDbContract;
+
 /*************************************************************/
 /*                                                           */ 
 /* City                                                      */ 
@@ -68,9 +72,27 @@ public class City
 		
 		JSONArray regionArray = jsonObject.getJSONArray( "region" );
 		region = regionArray.getJSONObject( 0 ).getString( "value" );
-		
+
 		JSONArray weatherUrlArray = jsonObject.getJSONArray( "weatherUrl" );
 		weatherUrl = weatherUrlArray.getJSONObject( 0 ).getString( "value" );
+	}
+
+	/*********************************************************/
+	/*                                                       */
+	/* City.City() Cursor Constructor                        */
+	/*                                                       */
+	/*********************************************************/
+	public City( Cursor cursor )
+	{
+		this( -1, null, null, null, null, 0, null, null );
+
+		this.id = cursor.getLong( cursor.getColumnIndex( WeatherDbContract.CityTable._ID ) );
+		this.name = cursor.getString( cursor.getColumnIndex( WeatherDbContract.CityTable.COLUMN_NAME_NAME ) );
+		this.country = cursor.getString( cursor.getColumnIndex( WeatherDbContract.CityTable.COLUMN_NAME_COUNTRY ) );
+		this.latitude = cursor.getString( cursor.getColumnIndex( WeatherDbContract.CityTable.COLUMN_NAME_LATITUDE ) );
+		this.longitude = cursor.getString( cursor.getColumnIndex( WeatherDbContract.CityTable.COLUMN_NAME_LONGITUDE ) );
+		this.population = cursor.getLong( cursor.getColumnIndex( WeatherDbContract.CityTable.COLUMN_NAME_POPULATION ) );
+		this.weatherUrl = cursor.getString( cursor.getColumnIndex( WeatherDbContract.CityTable.COLUMN_NAME_URL ) );
 	}
 
 	/*********************************************************/

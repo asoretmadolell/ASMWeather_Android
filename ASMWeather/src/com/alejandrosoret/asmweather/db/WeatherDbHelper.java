@@ -61,58 +61,58 @@ public class WeatherDbHelper extends SQLiteOpenHelper
 	/*                                                       */ 
 	/*********************************************************/
 	private static final String SQL_ASMWEATHER_CREATE_CITY_TABLE_STMT = "CREATE TABLE " + 
-			WeatherDbContract.CCityTable.TABLE_NAME + 
+			WeatherDbContract.CityTable.TABLE_NAME + 
 			" (" +
-			WeatherDbContract.CCityTable._ID									+	" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			WeatherDbContract.CCityTable.COLUMN_NAME_NAME						+ 	" TEXT, " +
-			WeatherDbContract.CCityTable.COLUMN_NAME_COUNTRY						+ 	" TEXT, " +
-			WeatherDbContract.CCityTable.COLUMN_NAME_LATITUDE						+ 	" TEXT, " +
-			WeatherDbContract.CCityTable.COLUMN_NAME_LONGITUDE					+ 	" TEXT, " +
-			WeatherDbContract.CCityTable.COLUMN_NAME_POPULATION					+ 	" LONG, " +
-			WeatherDbContract.CCityTable.COLUMN_NAME_URL							+ 	" TEXT"   +
+			WeatherDbContract.CityTable._ID									+	" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			WeatherDbContract.CityTable.COLUMN_NAME_NAME						+ 	" TEXT, " +
+			WeatherDbContract.CityTable.COLUMN_NAME_COUNTRY						+ 	" TEXT, " +
+			WeatherDbContract.CityTable.COLUMN_NAME_LATITUDE						+ 	" TEXT, " +
+			WeatherDbContract.CityTable.COLUMN_NAME_LONGITUDE					+ 	" TEXT, " +
+			WeatherDbContract.CityTable.COLUMN_NAME_POPULATION					+ 	" LONG, " +
+			WeatherDbContract.CityTable.COLUMN_NAME_URL							+ 	" TEXT"   +
 			" );";
 
 	private static final String SQL_ASMWEATHER_CREATE_CONDITION_TABLE_STMT = "CREATE TABLE " + 
-			WeatherDbContract.CConditionTable.TABLE_NAME + 
+			WeatherDbContract.ConditionTable.TABLE_NAME + 
 			" (" +
-			WeatherDbContract.CConditionTable._ID								+	" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			WeatherDbContract.CConditionTable.COLUMN_NAME_CITY_ID					+ 	" INTEGER, " 	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_CLOUD_COVERAGE			+ 	" INTEGER, " 	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_OBSERVATION_TIME			+ 	" LONG, " 	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_PRESSURE					+ 	" INTEGER, " 	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_TEMPERATURE_CELSIUS		+ 	" INTEGER, " 	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_VISIBILITY				+ 	" INTEGER, " 	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_TEMPERATURE_FAHRENHEIT		+ 	" INTEGER, "  	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_WIND_SPEED_MPH			+ 	" INTEGER, "  	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_PRECIPITATION				+ 	" REAL, "   	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_WIND_DIRECTION_DEGREES		+ 	" INTEGER, "  	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_WIND_DIRECTION_COMPASS		+ 	" TEXT, "   	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_ICON_URL					+ 	" TEXT, "   	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_HUMIDITY					+ 	" INTEGER, "  	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_WIND_SPEED_KMPH			+ 	" INTEGER, "  	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_WEATHER_CODE				+ 	" INTEGER, "  	+
-			WeatherDbContract.CConditionTable.COLUMN_NAME_WEATHER_DESCRIPTION		+ 	" TEXT"   	+
+			WeatherDbContract.ConditionTable._ID								+	" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			WeatherDbContract.ConditionTable.COLUMN_NAME_CITY_ID					+ 	" INTEGER, " 	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_CLOUD_COVERAGE			+ 	" INTEGER, " 	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_OBSERVATION_TIME			+ 	" LONG, " 	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_PRESSURE					+ 	" INTEGER, " 	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_TEMPERATURE_CELSIUS		+ 	" INTEGER, " 	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_VISIBILITY				+ 	" INTEGER, " 	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_TEMPERATURE_FAHRENHEIT		+ 	" INTEGER, "  	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_SPEED_MPH			+ 	" INTEGER, "  	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_PRECIPITATION				+ 	" REAL, "   	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_DIRECTION_DEGREES		+ 	" INTEGER, "  	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_DIRECTION_COMPASS		+ 	" TEXT, "   	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_ICON_URL					+ 	" TEXT, "   	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_HUMIDITY					+ 	" INTEGER, "  	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_SPEED_KMPH			+ 	" INTEGER, "  	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_WEATHER_CODE				+ 	" INTEGER, "  	+
+			WeatherDbContract.ConditionTable.COLUMN_NAME_WEATHER_DESCRIPTION		+ 	" TEXT"   	+
 			" );";
 
 	private static final String SQL_JMFWEATHER_CREATE_FORECAST_TABLE_STMT = "CREATE TABLE " + 
-			WeatherDbContract.CForecastTable.TABLE_NAME + 
+			WeatherDbContract.ForecastTable.TABLE_NAME + 
 			" (" +
-			WeatherDbContract.CForecastTable._ID								+	" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			WeatherDbContract.CForecastTable.COLUMN_NAME_CITY_ID					+ 	" INTEGER, " 	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_ICON_URL					+ 	" TEXT, "   	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_MIN_TEMPERATURE_CELSIUS		+ 	" INTEGER, " 	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WIND_SPEED_MPH				+ 	" INTEGER, "  	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WIND_SPEED_KMPH			+ 	" INTEGER, "  	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WIND_DIRECTION				+ 	" TEXT, "   	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_MAX_TEMPERATURE_CELSIUS		+ 	" INTEGER, " 	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_FORECAST_DATE				+ 	" LONG, " 	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WEATHER_CODE				+ 	" INTEGER, "  	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_MAX_TEMPERATURE_FAHRENHEIT	+ 	" INTEGER, "  	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_PRECIPITATION				+ 	" REAL, "   	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WIND_DIRECTION_DEGREES		+ 	" INTEGER, "  	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WIND_DIRECTION_COMPASS		+ 	" TEXT, "   	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_WEATHER_DESCRIPTION			+ 	" TEXT, "   	+
-			WeatherDbContract.CForecastTable.COLUMN_NAME_MIN_TEMPERATURE_FAHRENHEIT	+ 	" INTEGER"   	+
+			WeatherDbContract.ForecastTable._ID								+	" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			WeatherDbContract.ForecastTable.COLUMN_NAME_CITY_ID					+ 	" INTEGER, " 	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_ICON_URL					+ 	" TEXT, "   	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_MIN_TEMPERATURE_CELSIUS		+ 	" INTEGER, " 	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WIND_SPEED_MPH				+ 	" INTEGER, "  	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WIND_SPEED_KMPH			+ 	" INTEGER, "  	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WIND_DIRECTION				+ 	" TEXT, "   	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_MAX_TEMPERATURE_CELSIUS		+ 	" INTEGER, " 	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_FORECAST_DATE				+ 	" LONG, " 	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WEATHER_CODE				+ 	" INTEGER, "  	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_MAX_TEMPERATURE_FAHRENHEIT	+ 	" INTEGER, "  	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_PRECIPITATION				+ 	" REAL, "   	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WIND_DIRECTION_DEGREES		+ 	" INTEGER, "  	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WIND_DIRECTION_COMPASS		+ 	" TEXT, "   	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_WEATHER_DESCRIPTION			+ 	" TEXT, "   	+
+			WeatherDbContract.ForecastTable.COLUMN_NAME_MIN_TEMPERATURE_FAHRENHEIT	+ 	" INTEGER"   	+
 			" );";
 
 	/*********************************************************/
@@ -121,12 +121,12 @@ public class WeatherDbHelper extends SQLiteOpenHelper
 	/*                                                       */ 
 	/*********************************************************/
 	private static final String SQL_ASMWEATHER_DROP_CITY_TABLE_STMT = 
-			"DROP TABLE IF EXISTS " + WeatherDbContract.CCityTable.TABLE_NAME + ";";
+			"DROP TABLE IF EXISTS " + WeatherDbContract.CityTable.TABLE_NAME + ";";
 
 	private static final String SQL_JMFWEATHER_DROP_CONDITION_TABLE_STMT = 
-			"DROP TABLE IF EXISTS " + WeatherDbContract.CConditionTable.TABLE_NAME + ";";
+			"DROP TABLE IF EXISTS " + WeatherDbContract.ConditionTable.TABLE_NAME + ";";
 
 	private static final String SQL_JMFWEATHER_DROP_FORECAST_TABLE_STMT = 
-			"DROP TABLE IF EXISTS " + WeatherDbContract.CForecastTable.TABLE_NAME + ";";
+			"DROP TABLE IF EXISTS " + WeatherDbContract.ForecastTable.TABLE_NAME + ";";
 
 }

@@ -35,8 +35,8 @@ public class WorldWeatherApi
 	private static final int		HTTP_CONNECT_TIMEOUT_MS       = 15000; // millisecons
 	private static final int		HTTP_READ_TIMEOUT_MS          = 10000; // millisecons
 	private static final int		IO_BUFFER_SIZE                = 1024;
-	private static final String	WORLD_WEATHER_GET_WEATHER_URL = "http://api.worldweatheronline.com/free/v1/weather.ashx";
-	private static final String	WORLD_WEATHER_SEARCH_CITY_URL = "http://api.worldweatheronline.com/free/v1/search.ashx";
+	private static final String	WORLD_WEATHER_GET_WEATHER_URL = "https://api.worldweatheronline.com/free/v1/weather.ashx";
+	private static final String	WORLD_WEATHER_SEARCH_CITY_URL = "https://api.worldweatheronline.com/free/v1/search.ashx";
 	private static final String	WORLD_WEATHER_KEY             = "4b2c10814c79b59045a73474b2dccb281b703fb4";
 
 	private Charset			m_Charset;
