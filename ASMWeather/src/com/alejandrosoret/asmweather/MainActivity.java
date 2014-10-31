@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.activity_main );
 		
-		ASMApplication.initializeData( this );
+		ASMApplication.initializeData();
 		
 		cityListView = (ListView) findViewById( R.id.IDV_CITY_LISTVIEW );
 		cityListView.setAdapter( new CityAdapter( this, new WeatherDAO( this ).selectAllCities() ) );
@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 		if( (ListView)parent == cityListView )
 		{
 			Intent intent = new Intent( MainActivity.this, CityActivity.class );
-			intent.putExtra( ASMApplication.IDRC_CITY_LIST_ID, (long)position );
+			intent.putExtra( ASMApplication.IDRC_CITY_LIST_ID, id );
 			startActivity( intent );
 		}
      }

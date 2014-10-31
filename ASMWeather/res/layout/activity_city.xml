@@ -11,7 +11,126 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/IDV_CITY_TEMPERATURE"
+        android:id="@+id/IDV_CITY_COUNTRY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_LATITUDE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_LONGITUDE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_POPULATION"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_CLOUD_COVER_PERCENTAGE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_OBSERVATION_TIME"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_PRESSURE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_TEMPERATURE_CELSIUS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_VISIBILITY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_TEMPERATURE_FAHRENHEIT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_WIND_SPEED_MPH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_PRECIPITATION"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_WIND_DIRECTION_DEGREES"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_WIND_DIRECTION_COMPASS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_HUMIDITY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_WIND_SPEED_KMPH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_WEATHER_CODE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/IDV_CITY_WEATHER_DESCRIPTION"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

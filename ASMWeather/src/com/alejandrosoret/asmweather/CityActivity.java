@@ -6,11 +6,14 @@ import java.text.ParseException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.alejandrosoret.asmweather.db.WeatherDAO;
 import com.alejandrosoret.asmweather.model.City;
 import com.alejandrosoret.asmweather.model.Condition;
 import com.alejandrosoret.asmweather.weatherapi.WorldWeatherApi;
@@ -41,10 +44,29 @@ public class CityActivity extends ActionBarActivity
 	     super.onCreate( savedInstanceState );
 	     setContentView( R.layout.activity_city );
 	     
-	     city = ASMApplication.cityList.get( getIntent().getLongExtra( ASMApplication.IDRC_CITY_LIST_ID, -1 ) );
+	     long cityId = getIntent().getLongExtra( ASMApplication.IDRC_CITY_LIST_ID, -1);
+	     if( cityId == -1 ) return;
+     	Log.e( "CitiActivity", "CityId = " + cityId );
+	     
+	     WeatherDAO dao = new WeatherDAO( this );
+	     city = dao.selectCity( cityId );
+	     
+	     if( city == null )
+	     {
+	     	Log.e( "CitiActivity", "Ehhhhhh: city == null" );
+	     	return;
+	     }
 	     
 	     TextView cityName = (TextView)findViewById( R.id.IDV_CITY_NAME );
+	     TextView cityCountry = (TextView)findViewById( R.id.IDV_CITY_COUNTRY );
+	     TextView cityLatitude = (TextView)findViewById( R.id.IDV_CITY_LATITUDE );
+	     TextView cityLongitude = (TextView)findViewById( R.id.IDV_CITY_LONGITUDE );
+	     TextView cityPopulation = (TextView)findViewById( R.id.IDV_CITY_POPULATION );
 	     cityName.setText( city.getName() );
+	     cityCountry.setText( city.getCountry() );
+	     cityLatitude.setText( city.getLatitude() );
+	     cityLongitude.setText( city.getLongitude() );
+	     cityPopulation.setText( "" + city.getPopulation() );
 	     
 	     conditionAsyncTask = new ConditionAsyncTask();
 	     conditionAsyncTask.execute();
@@ -59,8 +81,34 @@ public class CityActivity extends ActionBarActivity
 	{
 		if( city.getCurrentCondition() != null )
 		{
-			TextView cityTemperature = (TextView)findViewById( R.id.IDV_CITY_TEMPERATURE );
-			cityTemperature.setText( "" + city.getCurrentCondition().getTemperatureCelsius() +"ºC" );
+			TextView cityCloudCoverPercentage = (TextView)findViewById( R.id.IDV_CITY_CLOUD_COVER_PERCENTAGE );
+			TextView cityObservationTime = (TextView)findViewById( R.id.IDV_CITY_OBSERVATION_TIME );
+			TextView cityPressure = (TextView)findViewById( R.id.IDV_CITY_PRESSURE );
+			TextView cityTemperatureCelsius = (TextView)findViewById( R.id.IDV_CITY_TEMPERATURE_CELSIUS );
+			TextView cityVisibility = (TextView)findViewById( R.id.IDV_CITY_VISIBILITY );
+			TextView cityTemperatureFahrenheit = (TextView)findViewById( R.id.IDV_CITY_TEMPERATURE_FAHRENHEIT );
+			TextView cityWindSpeedMph = (TextView)findViewById( R.id.IDV_CITY_WIND_SPEED_MPH );
+			TextView cityPrecipitation = (TextView)findViewById( R.id.IDV_CITY_PRECIPITATION );
+			TextView cityWindDirectionDegrees = (TextView)findViewById( R.id.IDV_CITY_WIND_DIRECTION_DEGREES );
+			TextView cityWindDirectionCompass = (TextView)findViewById( R.id.IDV_CITY_WIND_DIRECTION_COMPASS );
+			TextView cityHumidity = (TextView)findViewById( R.id.IDV_CITY_HUMIDITY );
+			TextView cityWindSpeedKmph = (TextView)findViewById( R.id.IDV_CITY_WIND_SPEED_KMPH );
+			TextView cityWeatherCode = (TextView)findViewById( R.id.IDV_CITY_WEATHER_CODE );
+			TextView cityWeatherDescription = (TextView)findViewById( R.id.IDV_CITY_WEATHER_DESCRIPTION );
+			cityCloudCoverPercentage.setText( "Cloud cover %: " + city.getCurrentCondition().getCloudCoverPercentage() );
+			cityObservationTime.setText( "Observation time: " + city.getCurrentCondition().getObservationTime() );
+			cityPressure.setText( "Pressure: " + city.getCurrentCondition().getPressure() );
+			cityTemperatureCelsius.setText( "Temperature: " + city.getCurrentCondition().getTemperatureCelsius() +"ºC" );
+			cityVisibility.setText( "Visibility: " + city.getCurrentCondition().getVisibility() );
+			cityTemperatureFahrenheit.setText( "Temperature: " + city.getCurrentCondition().getTemperatureFahrenheit() +"ºF" );
+			cityWindSpeedMph.setText( "Wind speed: " + city.getCurrentCondition().getWindSpeedMph() + "Mph" );
+			cityPrecipitation.setText( "Precipitation: " + city.getCurrentCondition().getPrecipitation() );
+			cityWindDirectionDegrees.setText( "Wind direction: " + city.getCurrentCondition().getWindDirectionDegrees() + " degrees" );
+			cityWindDirectionCompass.setText( "Wind direction: " + city.getCurrentCondition().getWindDirectionCompass() + " compass" );
+			cityHumidity.setText( "Humidity: " + city.getCurrentCondition().getHumidity() );
+			cityWindSpeedKmph.setText( "Wind speed: " + city.getCurrentCondition().getWindSpeedKmph() + "Kmph" );
+			cityWeatherCode.setText( "Weather code: " + city.getCurrentCondition().getWeatherCode() );
+			cityWeatherDescription.setText( "Weather description :" + city.getCurrentCondition().getWeatherDescription() );
 		}
 	}
 	

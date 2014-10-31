@@ -60,27 +60,29 @@ public class WeatherDAO
 		try
 		{
 			recordId = db.insert( WeatherDbContract.CityTable.TABLE_NAME, null, cityRecord );
-			if( recordId == -1 )
+			if( recordId != -1 )
 			{
-				ContentValues ConditionRecord = new ContentValues();
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_CITY_ID, 				recordId );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_CLOUD_COVERAGE, 			city.getCurrentCondition().getCloudCoverPercentage() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_OBSERVATION_TIME,			city.getCurrentCondition().getObservationTime() == null ? null : city.getCurrentCondition().getObservationTime().getTime() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_PRESSURE, 				city.getCurrentCondition().getPressure() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_TEMPERATURE_CELSIUS, 		city.getCurrentCondition().getTemperatureCelsius() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_VISIBILITY, 				city.getCurrentCondition().getVisibility() );			
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_TEMPERATURE_FAHRENHEIT,	city.getCurrentCondition().getTemperatureFahrenheit() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_SPEED_MPH,			city.getCurrentCondition().getWindSpeedMph() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_PRECIPITATION, 			city.getCurrentCondition().getPrecipitation() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_DIRECTION_DEGREES, 	city.getCurrentCondition().getWindDirectionDegrees() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_DIRECTION_COMPASS, 	city.getCurrentCondition().getWindDirectionCompass() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_ICON_URL, 				city.getCurrentCondition().getIconUrl() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_HUMIDITY, 				city.getCurrentCondition().getHumidity() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_SPEED_KMPH, 			city.getCurrentCondition().getWindSpeedKmph() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WEATHER_CODE, 			city.getCurrentCondition().getWeatherCode() );
-				ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WEATHER_DESCRIPTION, 		city.getCurrentCondition().getWeatherDescription() );
-	
-				db.insert( WeatherDbContract.ConditionTable.TABLE_NAME, null, ConditionRecord );
+				if( city.getCurrentCondition() != null )
+				{
+					ContentValues ConditionRecord = new ContentValues();
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_CITY_ID, 				recordId );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_CLOUD_COVERAGE, 			city.getCurrentCondition().getCloudCoverPercentage() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_OBSERVATION_TIME,			city.getCurrentCondition().getObservationTime() == null ? null : city.getCurrentCondition().getObservationTime().getTime() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_PRESSURE, 				city.getCurrentCondition().getPressure() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_TEMPERATURE_CELSIUS, 		city.getCurrentCondition().getTemperatureCelsius() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_VISIBILITY, 				city.getCurrentCondition().getVisibility() );			
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_TEMPERATURE_FAHRENHEIT,	city.getCurrentCondition().getTemperatureFahrenheit() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_SPEED_MPH,			city.getCurrentCondition().getWindSpeedMph() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_PRECIPITATION, 			city.getCurrentCondition().getPrecipitation() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_DIRECTION_DEGREES, 	city.getCurrentCondition().getWindDirectionDegrees() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_DIRECTION_COMPASS, 	city.getCurrentCondition().getWindDirectionCompass() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_ICON_URL, 				city.getCurrentCondition().getIconUrl() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_HUMIDITY, 				city.getCurrentCondition().getHumidity() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WIND_SPEED_KMPH, 			city.getCurrentCondition().getWindSpeedKmph() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WEATHER_CODE, 			city.getCurrentCondition().getWeatherCode() );
+					ConditionRecord.put( WeatherDbContract.ConditionTable.COLUMN_NAME_WEATHER_DESCRIPTION, 		city.getCurrentCondition().getWeatherDescription() );
+					db.insert( WeatherDbContract.ConditionTable.TABLE_NAME, null, ConditionRecord );
+				}
 				db.setTransactionSuccessful();
 			}
 		}
@@ -139,6 +141,26 @@ public class WeatherDAO
 		String orderBy = WeatherDbContract.CityTable.COLUMN_NAME_NAME + " ASC";
 		return db.query( WeatherDbContract.CityTable.TABLE_NAME, projection, null, null, null, null, orderBy );                               
 	}
+
+     /*********************************************************/
+     /*                                                       */
+     /* CWeatherDAO.selectCity()                              */
+     /*                                                       */
+     /*********************************************************/
+     public City selectCity( long cityId )
+     {
+          if( db == null ) db = dbHelper.getReadableDatabase();
+
+          String[] Projection = { "*" };
+          String Where = WeatherDbContract.CityTable._ID + " = ?";
+          String[] WhereArgs = new String[] { "" + cityId };
+
+          Cursor cursor = db.query( WeatherDbContract.CityTable.TABLE_NAME, Projection, Where, WhereArgs, null, null, null );
+          City city = null;
+          if( cursor != null && cursor.moveToFirst() ) city = new City( cursor );
+          this.close();
+          return city;
+     }
 
 	/*********************************************************/
 	/*                                                       */ 

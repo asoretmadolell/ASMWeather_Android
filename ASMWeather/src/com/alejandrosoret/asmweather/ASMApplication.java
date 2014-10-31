@@ -20,9 +20,8 @@ import com.alejandrosoret.asmweather.model.CityList;
 /*************************************************************/
 public class ASMApplication extends Application
 {
-	public static CityList cityList;
 	public static final String IDRC_CITY_LIST_ID = "IDRC_CITY_LIST_ID";
-//	public static Context context = null;
+	public static Context context = null;
 	public static final String IDRC_FIRST_TIME_RUNNING = "IDRC_FIRST_TIME_RUNNING";
 
 	     /*********************************************************/
@@ -40,13 +39,13 @@ public class ASMApplication extends Application
 	     public void onCreate()
 	     {
 	          super.onCreate();
-//	          context = getApplicationContext();
+	          ASMApplication.context = getApplicationContext();
 	     }
 	
-	     public static void initializeData( Context context )
+	     public static void initializeData()
 	     {
 	     	if( context == null ) return;
-//	     	if( isFirstTimeRunning( context ) )
+	     	if( isFirstTimeRunning() )
 	     	{
 	     		WeatherDAO dao = new WeatherDAO( context );
 	     		
@@ -62,7 +61,7 @@ public class ASMApplication extends Application
 	     	}
 	     }
 
-	     public static boolean isFirstTimeRunning( Context context )
+	     public static boolean isFirstTimeRunning()
 	     {
 	     	if( context == null ) return false;
 	     	SharedPreferences preferences = context.getSharedPreferences( "ASMWeather", Context.MODE_PRIVATE );
